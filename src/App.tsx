@@ -5,6 +5,7 @@ import User from './pages/User';
 import EditUser from './pages/EditUser';
 import PackageCard from './pages/PackageCard';
 import PackagePage from './pages/PackagePage';
+import EditPackage from './pages/EditPackage'
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
           <Route path="/user" element={<User />} />
           <Route path="/edit-user" element={<EditUser />} />
           <Route path="/" element={<PackagePage />} />
-          <Route path="/package" element={<PackageCard />} />   
+          <Route path="/package" element={<PackagePage />} />   
+          <Route path="/editpackage" element={<EditPackage />} />   
         </Routes>
       </div>
     </Router>
