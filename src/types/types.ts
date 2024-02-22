@@ -16,6 +16,5 @@ export interface PackageData {
   }
 
 export interface PackageComponentProps {
-    key: React.Key;
     data: PackageData;
 } 
