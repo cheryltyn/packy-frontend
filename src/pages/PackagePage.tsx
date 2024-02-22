@@ -33,7 +33,7 @@ const PackagesList: React.FC = () => {
       <h1 className='title'>My Packages</h1>
       <div className="package-list">
         {packages.map((packageData) => (
-          <PackageCard key={packageData._id} data={packageData} />
+          <PackageCard data={packageData} />
         ))}
       </div>
     </div>

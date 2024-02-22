@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import {createOne} from '../api/package.ts';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import {editOne, fetchOne} from '../api/package.ts';
 
 const EditPackage: React.FC = () => {
+  const { packageId } = useParams<{ package: string }>();
 
   const [formData, setFormData] = useState({
     packageName: '',
@@ -10,6 +12,20 @@ const EditPackage: React.FC = () => {
     numberOfSessionsTotal: '',
     packageType: ''
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchOne(packageId);
+        // console.log(data)
+        setFormData(data)
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData(); 
+  }, [packageId]); 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target; 
@@ -29,7 +45,7 @@ const EditPackage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(formData) //Check final logging isn't state before 
-    createOne(formData)
+    editOne(packageId, formData)
   };
 
   return (
@@ -43,7 +59,7 @@ const EditPackage: React.FC = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="expiryDate" className="form-label">Expiry Date</label>
-            <input type="date" className="form-control" id="expiryDate" value={formData.expiryDate} onChange={handleChange} />
+            <input type="date" className="form-control" id="expiryDate" value={preform.expiryDate} onChange={handleChange} />
           </div>
           <div className="mb-3">
             <label htmlFor="numberOfSessionsLeft" className="form-label">Number of Sessions Left</label>

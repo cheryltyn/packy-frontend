@@ -2,6 +2,7 @@
 const BASE_URL = 'http://localhost:3000'
 // import.meta.env.VITE_BASE_URL;
 
+
 export async function getAll() {
     try {
         const fullURL = `${BASE_URL}/packages`;  
@@ -41,7 +42,51 @@ export async function createOne(createdData) {
                 throw new Error(`Failed to fetch data: ${response.statusText}`);
             }
       const res = await response.json();
-      console.log(res);
+      return res
+    } catch (error) {
+      console.error('Error creating data:', error);
+      return error
+    }
+  }
+  
+export async function fetchOne(packageId) {
+    try {
+        const fullURL = `${BASE_URL}/fetchpackage?id=${packageId}`;  
+        const response = await fetch(fullURL, {
+            method: "GET",
+            headers: {
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${token}`,
+            //Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        });
+            if (!response.ok) {
+                throw new Error(`Failed to fetch data: ${response.statusText}`);
+            }
+      const res = await response.json();
+      return res
+    } catch (error) {
+      console.error('Error creating data:', error);
+      return error
+    }
+  }
+  
+  export async function editOne(packageId, updatedData) {
+    try {
+        const fullURL = `${BASE_URL}/editpackage?id=${packageId}`;  
+        const response = await fetch(fullURL, {
+            method: "PUT",
+            body: JSON.stringify(updatedData),
+            headers: {
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${token}`,
+            //Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        });
+            if (!response.ok) {
+                throw new Error(`Failed to fetch data: ${response.statusText}`);
+            }
+      const res = await response.json();
       return res
     } catch (error) {
       console.error('Error creating data:', error);
