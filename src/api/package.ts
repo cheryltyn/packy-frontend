@@ -94,3 +94,25 @@ export async function fetchOne(packageId) {
     }
   }
   
+  export async function deleteOne(packageId) {
+    try {
+        const fullURL = `${BASE_URL}/deletepackage?id=${packageId}`;  
+        const response = await fetch(fullURL, {
+            method: "DELETE",
+            headers: {
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${token}`,
+            //Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        });
+            if (!response.ok) {
+                throw new Error(`Failed to fetch data: ${response.statusText}`);
+            }
+      const res = await response.json();
+      return res
+    } catch (error) {
+      console.error('Error creating data:', error);
+      return error
+    }
+  }
+  

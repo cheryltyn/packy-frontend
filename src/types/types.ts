@@ -15,6 +15,7 @@ export interface PackageData {
     packageType: PackageType;
   }
 
-export interface PackageComponentProps {
+  export interface PackageComponentProps {
     data: PackageData;
-} 
+    onDelete: (packageId: string) => void; 
+}

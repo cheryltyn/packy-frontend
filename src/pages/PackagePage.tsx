@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {getAll} from '../api/package.ts';
+import {getAll, deleteOne} from '../api/package.ts';
 import PackageCard from './PackageCard.tsx';
 import { PackageData } from '../types/types.ts'; 
 
@@ -27,13 +27,26 @@ const PackagesList: React.FC = () => {
     fetchData(); 
   }, []); 
 
+  const handleDelete = async (packageId) => {
+    try {
+      await deleteOne(packageId);
+      setPackages(prevPackages => prevPackages.filter(pkg => pkg._id !== packageId));
+      // For example: handleCloseModal();
+    } catch (error) {
+      console.error('Error deleting package:', error);
+      // Optionally handle errors here, such as displaying an error message to the user
+    }
+  };
 
   return (
     <div className="container mt-5 d-flex flex-column align-items-center min-vh-100">
       <h1 className='title'>My Packages</h1>
       <div className="package-list">
         {packages.map((packageData) => (
-          <PackageCard data={packageData} />
+          <PackageCard 
+          key={packageData._id} 
+          data={packageData} 
+          onDelete={(packageId) => handleDelete(packageId)} />
         ))}
       </div>
     </div>

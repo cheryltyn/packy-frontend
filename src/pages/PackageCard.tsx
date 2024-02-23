@@ -1,24 +1,11 @@
 import React, { useState } from 'react';
 import { PackageComponentProps } from '../types/types.ts'; 
 import { Link } from 'react-router-dom';
-import { Modal, Button } from 'react-bootstrap';
 
-const PackageCard: React.FC<PackageComponentProps> = ({data}) => {
+const PackageCard: React.FC<PackageComponentProps> = ({data, onDelete}) => {
 
-    const [showModal, setShowModal] = useState(false);
   
-    const handleShowModal = () => setShowModal(true);
-    const handleCloseModal = () => setShowModal(false);
-
-    const handleDelete = () => {
-      // Add delete logic here
-      // This function will be called when the user confirms deletion
-      // You can close the modal after deleting the item
-      handleCloseModal();
-    };
   
-    
-
   return (
     <div className="container mt-4">
       <div className="card rounded-5 border border-light" style={{ width: '400px' }}>
@@ -34,24 +21,8 @@ const PackageCard: React.FC<PackageComponentProps> = ({data}) => {
               </Link>
             </div>
             <div className="d-inline">
-                <button className="btn btn-secondary ml-2">Delete</button>
+                <button className="btn btn-secondary ml-2" onClick={() => onDelete(data._id)}>Delete</button>
             </div>
-            <Modal show={showModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Confirm Delete</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Are you sure you want to delete?
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Close
-          </Button>
-          <Button variant="danger" onClick={handleDelete}>
-            Delete
-          </Button>
-        </Modal.Footer>
-      </Modal>
           </div>
         </div>
       </div>
