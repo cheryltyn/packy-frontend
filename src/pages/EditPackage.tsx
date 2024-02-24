@@ -59,7 +59,7 @@ const EditPackage: React.FC = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="expiryDate" className="form-label">Expiry Date</label>
-            <input type="date" className="form-control" id="expiryDate" value={preform.expiryDate} onChange={handleChange} />
+            <input type="date" className="form-control" id="expiryDate" value={formData.expiryDate} onChange={handleChange} />
           </div>
           <div className="mb-3">
             <label htmlFor="numberOfSessionsLeft" className="form-label">Number of Sessions Left</label>

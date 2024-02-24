@@ -13,7 +13,6 @@ import { PackageData } from '../types/types.ts';
 
 const PackagesList: React.FC = () => {
   const [packages, setPackages] = useState<PackageData[]>([]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
