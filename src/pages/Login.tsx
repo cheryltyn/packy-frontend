@@ -18,7 +18,6 @@ const SignUpForm: React.FC = () => {
     try {
       const response = await handleLogin(loginForm);
       if (response.message === 'Login successful') {
-        // Redirect to the home page or any other desired page
         window.location.href = '/';
       }
     } catch (error) {
