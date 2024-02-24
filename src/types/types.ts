@@ -19,3 +19,15 @@ export interface PackageData {
     data: PackageData;
     onDelete: (packageId: string) => void; 
 }
+
+export interface SignupData {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface LoginData {
+  name: string;
+  email: string;
+  password: string;
+}
