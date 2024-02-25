@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import {createOne} from '../api/package.ts';
+import { useContext } from 'react'
+import { UserContext } from '../App'; 
+import { createdData } from '../types/types.ts'; 
+import { useNavigate } from 'react-router-dom'; 
 
 const AddPackageForm: React.FC = () => {
+  const user = useContext(UserContext);
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<createdData>({
     packageName: '',
     expiryDate: '',
     numberOfSessionsLeft: '', 
@@ -26,12 +31,17 @@ const AddPackageForm: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData) //Check final logging isn't state before 
-    createOne(formData)
+    try {
+      console.log(formData); 
+      await createOne(formData, user._id); 
+      navigate('/packages'); 
+    } catch (error) {
+      console.error('Error creating package:', error);
+      // Handle error if needed
+    }
   };
-
   return (
     <div className="container mt-5 d-flex flex-column align-items-center min-vh-100">
       <div className="w-100" style={{ maxWidth: '500px' }}> 

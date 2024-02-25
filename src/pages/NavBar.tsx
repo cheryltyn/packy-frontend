@@ -24,7 +24,7 @@ const NavigationBar: React.FC = ({ onLogOut }) => {
               <Nav.Link as={Link} to="/user">
                 <i className="bi bi-person-circle large-icon"></i>
               </Nav.Link>
-              <span className="fs-6 my-auto"> {user} </span>
+              <span className="fs-6 my-auto"> {user.name} </span>
               <Nav.Link as={Link} to="">
                 <Button variant="primary" onClick={onLogOut}>Logout</Button>
               </Nav.Link>

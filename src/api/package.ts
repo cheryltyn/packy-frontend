@@ -3,32 +3,38 @@ const BASE_URL = 'http://localhost:3000/package'
 // import.meta.env.VITE_BASE_URL;
 
 
-export async function getAll() {
-    try {
-        const fullURL = `${BASE_URL}/packages`;  
-        const response = await fetch(fullURL, {
-            method: "GET",
-            headers: {
-            "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`,
-            //Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-        });
-            if (!response.ok) {
-                throw new Error(`Failed to fetch data: ${response.statusText}`);
-            }
-      const data = await response.json();
-      console.log('Data from backend:', data);
-      return data
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      return error
+export async function getAll(userID) {
+  try {
+    const fullURL = `${BASE_URL}/packages?userid=${userID}`;  
+    const response = await fetch(fullURL, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Bearer ${token}`,
+        //Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error('Packages not found for the specified user');
+      }
+      throw new Error(`Failed to fetch data: ${response.statusText}`);
     }
+
+    const data = await response.json();
+    console.log('Data from backend:', data);
+    return data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error; // Rethrow the error
   }
+}
+
   
-export async function createOne(createdData) {
+export async function createOne(createdData, userId) {
     try {
-        const fullURL = `${BASE_URL}/newpackage`;  
+        const fullURL = `${BASE_URL}/newpackage?userid=${userId}`;  
         const response = await fetch(fullURL, {
             method: "POST",
             body: JSON.stringify(createdData),
@@ -38,6 +44,7 @@ export async function createOne(createdData) {
             //Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
         });
+
             if (!response.ok) {
                 throw new Error(`Failed to fetch data: ${response.statusText}`);
             }

@@ -42,3 +42,17 @@
 body {
   background-color: #F2F4F8;
 }
+
+.redirect-link {
+  text-decoration: underline; /* Add underline */
+  color: inherit; /* Inherit text color from parent */
+}
+
+.redirect-link:hover {
+  text-decoration: underline; /* Add underline on hover */
+  color: inherit; /* Inherit text color from parent on hover */
+}
+
+.link-text {
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
