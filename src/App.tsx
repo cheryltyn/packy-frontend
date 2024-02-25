@@ -16,32 +16,38 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const userName = getUser().name
-    setUser(userName);
+    const fetchedUser = getUser();
+    setUser(fetchedUser);
   }, []);
 
   function handleLogOut() {
     localStorage.removeItem("token");
     setUser(null);
   }
+
+  console.log(user)
   
   return (
     <UserContext.Provider value={user}>
-    <Router>
-      <div>
-        <NavBar onLogOut={handleLogOut} /> 
-        <Routes>
-          <Route path="/create" element={<CreatePackage />} />
-          <Route path="/user" element={<User />} />
-          <Route path="/edit-user" element={<EditUser />} />
-          <Route path="/package" element={<PackagePage />} />   
-          <Route path="/signup" element={<SignUp />} />   
-          <Route path="/login" element={<Login />} />   
-          <Route path="/editpackage/:packageId" element={<EditPackage />} />  
-          <Route path="/" element={<Navigate to={user ? '/package' : '/login'} />} />   
-        </Routes>
-      </div>
-    </Router>
+      <Router>
+        <div>
+          <NavBar onLogOut={handleLogOut} /> 
+          <Routes>
+            {user && (
+              <>
+                <Route path="/create" element={<CreatePackage />} />
+                <Route path="/user" element={<User />} />
+                <Route path="/edit-user" element={<EditUser />} />
+                <Route path="/package" element={<PackagePage />} /> 
+                <Route path="/editpackage/:packageId" element={<EditPackage />} />   
+              </>
+            )}
+            <Route path="/signup" element={<SignUp />} />   
+            <Route path="/login" element={<Login />} />   
+            <Route path="/" element={<Navigate to={user ? '/package' : '/login'} />} />   
+          </Routes>
+        </div>
+      </Router>
     </UserContext.Provider>
   );
 }

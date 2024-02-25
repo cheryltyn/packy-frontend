@@ -20,7 +20,7 @@ const PackageCard: React.FC<PackageComponentProps> = ({data, onDelete}) => {
                 <button className="btn btn-secondary ml-2">Edit</button>
               </Link>
             </div>
-            <div className="d-inline">
+            <div className="d-inline" style={{ marginLeft: '10px' }}>
                 <button className="btn btn-secondary ml-2" onClick={() => onDelete(data._id)}>Delete</button>
             </div>
           </div>

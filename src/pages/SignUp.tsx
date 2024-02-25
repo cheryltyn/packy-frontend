@@ -2,22 +2,34 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {createUser} from '../api/user'
 import { SignupData } from '../types/types.ts'; 
-
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignUpForm: React.FC = () => {
-  // Local state to handle form data
+
+  const navigate = useNavigate() 
+
   const [signupData, setSignupData] = useState<SignupData>({
     name: '',
     email: '',
     password: '',
   });
 
-  // Handle form submission
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    createUser(signupData)
-    console.log(signupData);
-  };
+    try {
+        const success = await createUser(signupData);
+        console.log(signupData);
+        if (success) {
+            // Redirect to the login page after successful signup
+            navigate('/login');
+        } else {
+        }
+    } catch (error) {
+        // Handle error if createUser fails
+        console.error('Error signing up:', error);
+    }
+};
 
   // Update form data as user types
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,13 +37,15 @@ const SignUpForm: React.FC = () => {
       ...signupData,
       [e.target.name]: e.target.value,
     });
-    console.log(signupData)
   };
 
   return (
     <div className="container mt-5">
       <div className="row justify-content-center">
         <div className="col-md-6">
+        <Link to="/login" className="redirect-link">
+            <span className="link-text">Already a user? Log in here</span>
+        </Link>
           <h2 className="text-center mb-4 title" > Sign Up</h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group mb-3">
@@ -70,7 +84,7 @@ const SignUpForm: React.FC = () => {
                 required
               />
             </div>
-            <div className="d-grid">
+            <div className="d-grid gap-2">
               <button type="submit" className="btn btn-primary btn-lg">
                 Sign Up
               </button>

@@ -27,7 +27,20 @@ export interface SignupData {
 }
 
 export interface LoginData {
+  email: string;
+  password: string;
+}
+
+export interface userData {
   name: string;
   email: string;
   password: string;
 }
+
+export interface createdData {
+  packageName: string;
+  expiryDate: string;
+  numberOfSessionsLeft: string;
+  numberOfSessionsTotal: string;
+  packageType: string;
+};

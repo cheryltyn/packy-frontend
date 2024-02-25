@@ -1,40 +1,53 @@
 import React from 'react';
-import { getUser } from "../utils/user";
 import { useEffect, useState } from 'react'
-import { editUser } from '../api/user';
+import { editUser, deleteUser } from '../api/user';
+import { UserData } from '../types/types.ts'; 
+import { useContext } from 'react'
+import { UserContext } from '../App'; 
+
 
 const ProfileCard: React.FC = () => {
 
-  const [userData, setUserData] = useState({
+  const user = useContext(UserContext);
+  
+  const [userData, setUserData] = useState<UserData>({
     name: "",
     email: "",
-  })
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserData(prevState => ({
-      ...prevState,
-      [e.target.id]: e.target.value
-    }));
-  };
+    password: "",
+  });
 
   useEffect(() => {
-    const user = getUser()
-    setUserData({
-      name: user.name, 
-      email: user.email, 
-    })
-  }, []);
+    if (user) {
+      setUserData({
+        name: user.name,
+        email: user.email,
+        password: user.password,
+      });
+    }
+  }, [user]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserData((prevState: UserData)  => ({
+      ...prevState,
+      [e.target.id]: e.target.value
+    }))
+  }; 
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     editUser(userData)
+
+  };
+
+  const onDelete = (e: React.FormEvent) => {
+    e.preventDefault();
+    deleteUser(userData.email)
   };
 
   return (
 <div className="container mt-5 d-flex flex-column align-items-center min-vh-100">
   <div className="card-body">
     <h1 className="title">My Profile</h1>
-    <img src={userData.profilePictureUrl} alt="Profile" className="rounded-circle" style={{ width: '100px', height: '100px' }} />
     <h3 className="mt-3 username">{userData.name}</h3>
     <div className="d-flex justify-content-around my-3">
       <div>
@@ -48,18 +61,22 @@ const ProfileCard: React.FC = () => {
         <div>Total Complete</div>
       </div>
     </div>
-    <form onSubmit={handleSubmit}> {/* Add form element here */}
+    <form onSubmit={handleSubmit}> 
       <div className="mb-3">
         <label htmlFor="userName" className="form-label">Name</label>
         <input type="text" className="form-control" id="name" value={userData.name} onChange={handleChange} />
       </div>
       <div className="mb-3">
         <label htmlFor="userEmail" className="form-label">Email</label>
-        <input type="email" className="form-control" id="email" value={userData.email} onChange={handleChange}  />
+        <input type="email" className="form-control" id="email" value={userData.email} onChange={handleChange} disabled />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="password" className="form-label">Password</label>
+        <input type="password" className="form-control" id="password" value={userData.password} onChange={handleChange}  />
       </div>
       <div className="d-grid gap-2">
           <button type="submit" className="btn btn-primary">Edit User</button> 
-          <button type="button" className="btn btn-primary">Logout</button> {/* Change type to button */}
+          <button type="button" className="btn btn-primary" onClick={onDelete}>Delete User</button> 
       </div>
     </form>
   </div>

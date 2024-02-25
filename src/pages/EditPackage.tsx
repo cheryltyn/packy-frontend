@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {editOne, fetchOne} from '../api/package.ts';
+import { useNavigate } from 'react-router-dom'; 
 
 const EditPackage: React.FC = () => {
   const { packageId } = useParams<{ package: string }>();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     packageName: '',
@@ -42,11 +44,18 @@ const EditPackage: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+ const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData) //Check final logging isn't state before 
-    editOne(packageId, formData)
+    try {
+      console.log(formData); 
+      await editOne(packageId, formData);
+      navigate('/package'); 
+    } catch (error) {
+      console.error('Error editing package:', error);
+
+    }
   };
+
 
   return (
     <div className="container mt-5 d-flex flex-column align-items-center min-vh-100">
