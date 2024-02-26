@@ -105,3 +105,28 @@ export async function createUser(userData: SignupData): Promise<boolean> {
     }
   }
  
+
+  export async function fetchUser(userID) {
+    try {
+        const fullURL = `${BASE_URL}/getuser?id=${userID}`;  
+        const response = await fetch(fullURL, {
+            method: "GET",
+            headers: {
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${token}`,
+            //Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        });
+            if (!response.ok) {
+                throw new Error(`Failed to fetch the user: ${response.statusText}`);
+            }
+      
+      const data = await response.json();
+      console.log(data)
+      return data
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      return error
+    }
+  }
+ 

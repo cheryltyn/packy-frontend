@@ -6,6 +6,18 @@ import { useNavigate } from 'react-router-dom';
 const EditPackage: React.FC = () => {
   const { packageId } = useParams<{ package: string }>();
   const navigate = useNavigate();
+  const [error, setError] = useState()
+
+  function formatDate(date) {
+    date = new Date(date);
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+  
+    month = month.toString().length < 2 ? "0" + month : month;
+    day = day.toString().length < 2 ? "0" + day : day;
+    return `${year}-${month}-${day}`;
+  }
 
   const [formData, setFormData] = useState({
     packageName: '',
@@ -19,7 +31,7 @@ const EditPackage: React.FC = () => {
     const fetchData = async () => {
       try {
         const data = await fetchOne(packageId);
-        // console.log(data)
+        data.expiryDate = formatDate(data.expiryDate)
         setFormData(data)
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -46,6 +58,17 @@ const EditPackage: React.FC = () => {
 
  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const hasNullValues = Object.values(formData).some(value => value === null || value === '');
+
+    if (hasNullValues) {
+      setError('All fields are required.');
+      return;
+    }
+    if (parseInt(formData.numberOfSessionsTotal) <= parseInt(formData.numberOfSessionsLeft)) {
+      setError('Number of sessions total must be larger than number of sessions left.');
+      return;
+    }
     try {
       console.log(formData); 
       await editOne(packageId, formData);
@@ -61,6 +84,7 @@ const EditPackage: React.FC = () => {
     <div className="container mt-5 d-flex flex-column align-items-center min-vh-100">
       <div className="w-100" style={{ maxWidth: '500px' }}> 
         <h1 className="title text-center mb-4">Edit Package</h1>
+         {error && <div className="text-danger mb-3">{error}</div>}
         <form onSubmit={handleSubmit} className="w-100">
           <div className="mb-3">
             <label htmlFor="packageName" className="form-label">Name</label>

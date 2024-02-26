@@ -36,7 +36,7 @@ function App() {
             {user && (
               <>
                 <Route path="/create" element={<CreatePackage />} />
-                <Route path="/user" element={<User />} />
+                <Route path="/user" element={<User id={user ? user._id : null} />} />
                 <Route path="/edit-user" element={<EditUser />} />
                 <Route path="/package" element={<PackagePage />} /> 
                 <Route path="/editpackage/:packageId" element={<EditPackage />} />   
