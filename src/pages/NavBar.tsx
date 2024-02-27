@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react'
 import { UserContext } from '../App'; 
 
-const NavigationBar: React.FC = ({ onLogOut }) => {
+const NavigationBar: React.FC<{ onLogOut?: () => void }> = ({ onLogOut }) => {
 
   const user = useContext(UserContext);
 

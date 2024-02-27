@@ -6,7 +6,7 @@ import { useContext } from 'react'
 import { UserContext } from '../App'; 
 import { updateToken } from '../utils/user'
 
-const ProfileCard: React.FC = ({id}) => {
+const ProfileCard: React.FC = () => {
 
   const user = useContext(UserContext);
   

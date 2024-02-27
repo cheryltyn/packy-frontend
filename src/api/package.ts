@@ -3,7 +3,7 @@ const BASE_URL = 'http://localhost:3000/package'
 // import.meta.env.VITE_BASE_URL;
 
 
-export async function getAll(userID, filter) {
+export async function  getAll(userID: string, filter: string) {
   try {
     const fullURL = `${BASE_URL}/packages?userid=${userID}&filter=${filter}`;  
     const response = await fetch(fullURL, {
@@ -32,7 +32,7 @@ export async function getAll(userID, filter) {
 }
 
   
-export async function createOne(createdData, userId) {
+export async function createOne(createdData : string, userId : string) {
     try {
         const fullURL = `${BASE_URL}/newpackage?userid=${userId}`;  
         const response = await fetch(fullURL, {
@@ -56,7 +56,7 @@ export async function createOne(createdData, userId) {
     }
   }
   
-export async function fetchOne(packageId) {
+export async function fetchOne(packageId : string) {
     try {
         const fullURL = `${BASE_URL}/fetchpackage?id=${packageId}`;  
         const response = await fetch(fullURL, {
@@ -101,7 +101,7 @@ export async function fetchOne(packageId) {
     }
   }
   
-  export async function deleteOne(packageId) {
+  export async function deleteOne(packageId : string) {
     try {
         const fullURL = `${BASE_URL}/deletepackage?id=${packageId}`;  
         const response = await fetch(fullURL, {
