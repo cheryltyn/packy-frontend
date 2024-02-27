@@ -20,9 +20,6 @@ const NavigationBar: React.FC = ({ onLogOut }) => {
               <Nav.Link as={Link} to="/create">
                 <Button variant="primary">Create</Button>
               </Nav.Link>
-              <Nav.Link href="#settings">
-                <i className="bi bi-gear large-icon"></i>
-              </Nav.Link>
               <Nav.Link as={Link} to="/user">
                 <i className="bi bi-person-circle large-icon"></i>
               </Nav.Link>

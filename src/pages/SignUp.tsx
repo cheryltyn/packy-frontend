@@ -13,24 +13,25 @@ const SignUpForm: React.FC = () => {
     email: '',
     password: '',
   });
+  const [error, setError] = useState("")
 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-        const success = await createUser(signupData);
-        console.log(signupData);
-        if (success) {
-            // Redirect to the login page after successful signup
-            navigate('/login');
-        } else {
-        }
+      const response = await createUser(signupData);
+      if (response.ok) {
+        navigate('/login');
+      } else {
+        setError('Failed to sign up. Please try a different email.'); // Set an error message as a string
+      }
     } catch (error) {
-        // Handle error if createUser fails
-        console.error('Error signing up:', error);
+      // Handle error if createUser fails
+      console.error('Error signing up:', error);
+      setError('Failed to sign up. Please try a different email.'); // Set an error message as a string
     }
-};
-
+  };
+  
   // Update form data as user types
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSignupData({
@@ -47,6 +48,7 @@ const SignUpForm: React.FC = () => {
             <span className="link-text">Already a user? Log in here</span>
         </Link>
           <h2 className="text-center mb-4 title" > Sign Up</h2>
+          {error && <div className="text-danger mb-3">{error}</div>}
           <form onSubmit={handleSubmit}>
             <div className="form-group mb-3">
               <label htmlFor="name" className="form-label">Name</label>

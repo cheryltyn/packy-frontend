@@ -3,29 +3,28 @@ import { LoginData, SignupData } from '../types/types.ts';
 const BASE_URL = 'http://localhost:3000/user'
 // import.meta.env.VITE_BASE_URL;
 
-export async function createUser(userData: SignupData): Promise<boolean> {
+export async function createUser(userData: SignupData): Promise<Response> {
   try {
-      const fullURL = `${BASE_URL}/signup`;
-      const response = await fetch(fullURL, {
-          method: "POST",
-          body: JSON.stringify(userData),
-          headers: {
-              "Content-Type": "application/json",
-          },
-      });
+    const fullURL = `${BASE_URL}/signup`;
+    const response = await fetch(fullURL, {
+      method: "POST",
+      body: JSON.stringify(userData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-      if (!response.ok) {
-          throw new Error(`Failed to fetch data: ${response.statusText}`);
-      }
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data: ${response.statusText}`);
+    }
 
-      // Return true if signup was successful
-      return true;
+    return response; // Return the response object
   } catch (error) {
-      console.error('Error creating user:', error);
-      // Return false if signup fails
-      return false;
+    console.error('Error creating user:', error);
+    throw error; // Re-throw the error to be handled by the caller
   }
 }
+
  
   export async function handleLogin(userData: LoginData) {
     try {
@@ -49,7 +48,7 @@ export async function createUser(userData: SignupData): Promise<boolean> {
       return data
     } catch (error) {
       console.error('Error fetching login:', error);
-      return error
+      throw error;
     }
   }
  

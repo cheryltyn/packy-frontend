@@ -3,9 +3,9 @@ const BASE_URL = 'http://localhost:3000/package'
 // import.meta.env.VITE_BASE_URL;
 
 
-export async function getAll(userID) {
+export async function getAll(userID, filter) {
   try {
-    const fullURL = `${BASE_URL}/packages?userid=${userID}`;  
+    const fullURL = `${BASE_URL}/packages?userid=${userID}&filter=${filter}`;  
     const response = await fetch(fullURL, {
       method: "GET",
       headers: {
