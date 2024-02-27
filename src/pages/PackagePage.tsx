@@ -8,7 +8,6 @@ import { UserContext } from '../App';
 const PackagesList: React.FC = () => {
   const [packages, setPackages] = useState<PackageData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState("")
   const user = useContext(UserContext);
   const [activeFilter, setActiveFilter] = useState<string>('All'); 
 
