@@ -4,15 +4,15 @@ import {editOne, fetchOne} from '../api/package.ts';
 import { useNavigate } from 'react-router-dom'; 
 
 const EditPackage: React.FC = () => {
-  const { packageId } = useParams<{ package: string }>();
+  const { packageId } = useParams<{ packageId: string }>();
   const navigate = useNavigate();
-  const [error, setError] = useState()
+  const [error, setError] = useState<string | undefined>(undefined);
 
-  function formatDate(date) {
+  function formatDate(date: Date) {
     date = new Date(date);
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
+    let year = date.getFullYear().toString();
+    let month = (date.getMonth() + 1).toString();
+    let day = date.getDate().toString();
   
     month = month.toString().length < 2 ? "0" + month : month;
     day = day.toString().length < 2 ? "0" + day : day;

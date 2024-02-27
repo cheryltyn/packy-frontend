@@ -52,7 +52,7 @@ export async function createUser(userData: SignupData): Promise<Response> {
     }
   }
  
-  export async function editUser(userData) {
+  export async function editUser(userData : LoginData) {
     try {
         const fullURL = `${BASE_URL}/edituser`;  
         const response = await fetch(fullURL, {
@@ -79,7 +79,7 @@ export async function createUser(userData: SignupData): Promise<Response> {
   }
  
   
-  export async function deleteUser(userEmail) {
+  export async function deleteUser(userEmail : string) {
     try {
         const fullURL = `${BASE_URL}/deleteuser?email=${userEmail}`;  
         const response = await fetch(fullURL, {
@@ -105,7 +105,7 @@ export async function createUser(userData: SignupData): Promise<Response> {
   }
  
 
-  export async function fetchUser(userID) {
+  export async function fetchUser(userID : string) {
     try {
         const fullURL = `${BASE_URL}/getuser?id=${userID}`;  
         const response = await fetch(fullURL, {

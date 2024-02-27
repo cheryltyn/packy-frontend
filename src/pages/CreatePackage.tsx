@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 const AddPackageForm: React.FC = () => {
   const user = useContext(UserContext);
   const navigate = useNavigate()
-  const [error, setError] = useState()
+  const [error, setError] = useState<string | undefined>(undefined);
 
   const [formData, setFormData] = useState<createdData>({
     packageName: '',
@@ -47,8 +47,12 @@ const AddPackageForm: React.FC = () => {
     }
 
     try {
-      await createOne(formData, user._id); 
-      navigate('/package'); 
+      if (user) {
+        await createOne(formData, user._id); 
+        navigate('/package'); 
+      } else {
+        setError("User not found")
+      }
     } catch (error) {
       console.error('Error creating package:', error);
     }
