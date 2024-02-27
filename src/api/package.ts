@@ -32,7 +32,7 @@ export async function  getAll(userID: string, filter: string) {
 }
 
   
-export async function createOne(createdData : string, userId : string) {
+export async function createOne(createdData : any, userId : string) {
     try {
         const fullURL = `${BASE_URL}/newpackage?userid=${userId}`;  
         const response = await fetch(fullURL, {
@@ -78,7 +78,7 @@ export async function fetchOne(packageId : string) {
     }
   }
   
-  export async function editOne(packageId, updatedData) {
+  export async function editOne(packageId: string , updatedData : any) {
     try {
         const fullURL = `${BASE_URL}/editpackage?id=${packageId}`;  
         const response = await fetch(fullURL, {

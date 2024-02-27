@@ -1,10 +1,9 @@
 import React from 'react';
 import { useEffect, useState } from 'react'
-import { editUser, deleteUser, fetchUser } from '../api/user';
+import { editUser, deleteUser } from '../api/user';
 import { userData } from '../types/types.ts'; 
 import { useContext } from 'react'
 import { UserContext } from '../App'; 
-import { updateToken } from '../utils/user'
 
 const ProfileCard: React.FC = () => {
 

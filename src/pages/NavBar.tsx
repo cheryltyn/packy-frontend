@@ -8,7 +8,6 @@ const NavigationBar: React.FC<{ onLogOut?: () => void }> = ({ onLogOut }) => {
 
   const user = useContext(UserContext);
 
-  
 
   return (
     <Navbar bg="white" expand="lg" className="justify-content-between">
