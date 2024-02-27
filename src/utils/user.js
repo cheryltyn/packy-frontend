@@ -1,3 +1,5 @@
+import { fetchUser } from '../api/user';
+
 export function getToken() {
     const token = localStorage.getItem("token");
     if (!token) return null;
@@ -23,6 +25,7 @@ export function getToken() {
   
     try {
       const payload = JSON.parse(atob(token.split(".")[1])).payload.user;
+
       return payload;
     } catch (error) {
       console.error("Error decoding token:", error);
@@ -30,27 +33,34 @@ export function getToken() {
     }
   }
   
-  // Function to update user's name and password in localStorage token
-const updateToken = (name, password) => {
-  // Retrieve token from localStorage
-  const token = localStorage.getItem('token');
 
-  if (token) {
-    try {
-      // Decode token to obtain user information
-      const decodedToken = jwt_decode(token);
+// export async function getUser() {
+//   const token = getToken();
+//   if (!token) return null;
 
-      // Update user's name and password in decoded token
-      decodedToken.name = name;
-      decodedToken.password = password;
+//   try {
+//       const payload = JSON.parse(atob(token.split('.')[1])).payload.user;
+//       const updatedUserData = await fetchUser(payload._id);
+//       payload.name = updatedUserData.name;
+//       payload.password = updatedUserData.password;
+//       console.log(updatedUserData);
+//       return updatedUserData;
+//   } catch (error) {
+//       console.error('Error decoding token:', error);
+//       return null;
+//   }
+// }
+export function updateToken(data) {
+  const token = getToken();
+  if (!token) return null;
 
-      // Encode updated user information into new token
-      const updatedToken = jwt_encode(decodedToken);
-
-      // Store updated token back into localStorage
-      localStorage.setItem('token', updatedToken);
-    } catch (error) {
-      console.error('Error decoding or encoding token:', error);
-    }
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1])).payload.user;
+    payload.name=data.name
+    payload.password=data.password
+    return payload;
+  } catch (error) {
+    console.error("Error decoding token:", error);
+    return null;
   }
-};
+}

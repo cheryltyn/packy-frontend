@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const SignUpForm: React.FC = () => {
   const navigate = useNavigate();
+  const [error, setError] = useState("")
 
   const [loginForm, setLoginForm] = useState<LoginData>({
     email: '',
@@ -22,9 +23,10 @@ const SignUpForm: React.FC = () => {
       }
     } catch (error) {
       console.error('Error logging in:', error);
+      setError('Error logging in. Please try a different email or password.')
     }
   };
-  // Update form data as user types
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginForm({
       ...loginForm,
@@ -41,6 +43,7 @@ const SignUpForm: React.FC = () => {
             <span className="link-text">Sign up here</span>
         </Link>
           <h2 className="text-center mb-4 title" > Login </h2>
+          {error && <div className="text-danger mb-3">{error}</div>}
           <form onSubmit={handleSubmit}>
             <div className="form-group mb-3">
               <label htmlFor="email" className="form-label">Email</label>

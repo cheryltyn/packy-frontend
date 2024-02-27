@@ -10,16 +10,17 @@ const PackagesList: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState("")
   const user = useContext(UserContext);
+  const [activeFilter, setActiveFilter] = useState<string>('All'); 
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getAll(user._id);
+        const data = await getAll(user._id, activeFilter);
         setPackages(data || []);
         setLoading(false);
       } catch (error) {
         if (error.message === 'Packages not found for the specified user') {
-          // Handle "Packages not found" error
           setPackages([]);
         } else {
           console.error('Error fetching data:', error);
@@ -30,7 +31,7 @@ const PackagesList: React.FC = () => {
     };
   
     fetchData();
-  }, []);
+  }, [activeFilter]);
   
   console.log(packages)
 
@@ -47,6 +48,16 @@ const PackagesList: React.FC = () => {
   return (
     <div className="container mt-5 d-flex flex-column align-items-center min-vh-100">
       <h1 className='title'>My Packages</h1>
+
+      <div className="mb-3">
+        <button className={`btn ${activeFilter === 'All' ? 'btn-primary' : 'btn-secondary'}`} onClick={() => setActiveFilter('All')}>All</button>
+        <span className="mx-2"></span>
+        <button className={`btn ${activeFilter === 'Fitness' ? 'btn-primary' : 'btn-secondary'}`} onClick={() => setActiveFilter('Fitness')}>Fitness</button>
+        <span className="mx-2"></span> 
+        <button className={`btn ${activeFilter === 'Beauty' ? 'btn-primary' : 'btn-secondary'}`} onClick={() => setActiveFilter('Beauty')}>Beauty</button>
+      </div>
+
+      
       {loading ? (
         <div>Loading...</div>
       ) : packages.length === 0 ? (
