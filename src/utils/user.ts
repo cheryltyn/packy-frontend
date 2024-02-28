@@ -50,17 +50,17 @@ export function getToken() {
 //       return null;
 //   }
 // }
-export function updateToken(data) {
-  const token = getToken();
-  if (!token) return null;
+// export function updateToken(data) {
+//   const token = getToken();
+//   if (!token) return null;
 
-  try {
-    const payload = JSON.parse(atob(token.split(".")[1])).payload.user;
-    payload.name=data.name
-    payload.password=data.password
-    return payload;
-  } catch (error) {
-    console.error("Error decoding token:", error);
-    return null;
-  }
-}
+//   try {
+//     const payload = JSON.parse(atob(token.split(".")[1])).payload.user;
+//     payload.name=data.name
+//     payload.password=data.password
+//     return payload;
+//   } catch (error) {
+//     console.error("Error decoding token:", error);
+//     return null;
+//   }
+// }

@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getUser } from "../utils/user"; 
 import { getUserData } from '../types/types.ts'; 
 
-const Login: React.FC<{ setLoggedInUser: (fetchedUser: getUserData) => void }> = ({ setLoggedInUser }) => {
+const Login: React.FC<{ setLoggedInUser: (fetchedUser: getUserData | null ) => void }> = ({ setLoggedInUser }) => {
   const navigate = useNavigate();
   const [error, setError] = useState("")
 

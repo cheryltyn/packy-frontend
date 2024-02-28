@@ -20,19 +20,13 @@ function App() {
     const fetchedUser = getUser();
     setUser(fetchedUser);
   }, []);
-
-  const setLoggedInUser = (userData: getUserData) => {
+  const setLoggedInUser = (userData: getUserData | null ) => {
     setUser(userData);
   };
-
-
   function handleLogOut() {
     localStorage.removeItem("token");
     setUser(null);
   }
-
-
-
   console.log(user)
   
   return (
@@ -49,7 +43,12 @@ function App() {
                 <Route path="/package" element={<PackagePage />} /> 
                 <Route path="/editpackage/:packageId" element={<EditPackage />} />   
               </>
-            )}
+            )}   
+            {!user && <Route path="/create" element={<Navigate to="/login" />} />}
+            {!user && <Route path="/user" element={<Navigate to="/login" />} />}
+            {!user && <Route path="/edit-user" element={<Navigate to="/login" />} />}
+            {!user && <Route path="/package" element={<Navigate to="/login" />} />}
+            {!user && <Route path="/editpackage/:packageId" element={<Navigate to="/login" />} />}
             {user && <Route path="/signup" element={<Navigate to="/package" />} />}
             {user && <Route path="/login" element={<Navigate to="/package" />} />}
             <Route path="/signup" element={<SignUp />} />   

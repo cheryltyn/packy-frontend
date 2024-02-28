@@ -4,6 +4,7 @@ import PackageCard from './PackageCard.tsx';
 import { PackageData } from '../types/types.ts';
 import { useContext } from 'react';
 import { UserContext } from '../App';
+import { useNavigate } from 'react-router-dom';
 
 const PackagesList: React.FC = () => {
   const [packages, setPackages] = useState<PackageData[]>([]);
@@ -12,10 +13,17 @@ const PackagesList: React.FC = () => {
   const [fronterror, setFrontError] = useState<string>("")
   const [activeFilter, setActiveFilter] = useState<string>('All'); 
 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+
+        if (!user) {
+          navigate('/login'); 
+          return;
+        }
+        
         const data = await getAll(user._id, activeFilter);
         setPackages(data || []);
         setLoading(false);

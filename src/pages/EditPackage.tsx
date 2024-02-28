@@ -83,7 +83,7 @@ const EditPackage: React.FC = () => {
     }
     try {
       console.log(formData); 
-      await editOne(packageId, formData);
+      await editOne(packageId!, formData);
       navigate('/package'); 
     } catch (error) {
       console.error('Error editing package:', error);
