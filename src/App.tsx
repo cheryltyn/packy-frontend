@@ -50,6 +50,8 @@ function App() {
                 <Route path="/editpackage/:packageId" element={<EditPackage />} />   
               </>
             )}
+            {user && <Route path="/signup" element={<Navigate to="/package" />} />}
+            {user && <Route path="/login" element={<Navigate to="/package" />} />}
             <Route path="/signup" element={<SignUp />} />   
             <Route 
               path="/login" 
