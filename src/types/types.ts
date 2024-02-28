@@ -44,3 +44,12 @@ export interface createdData {
   numberOfSessionsTotal: string;
   packageType: string;
 };
+
+
+export interface getUserData {
+  _id: string;
+  name: string;
+  email: string;
+  password: string;
+  packages: any[]; 
+}

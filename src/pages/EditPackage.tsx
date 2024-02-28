@@ -28,18 +28,30 @@ const EditPackage: React.FC = () => {
   });
 
   useEffect(() => {
+    if (!packageId) {
+      // Handle the case where packageId is undefined
+      setError('Package ID is missing.');
+      return;
+    }
+
     const fetchData = async () => {
       try {
         const data = await fetchOne(packageId);
-        data.expiryDate = formatDate(data.expiryDate)
-        setFormData(data)
+        setFormData({
+          packageName: data.packageName,
+          expiryDate: formatDate(data.expiryDate),
+          numberOfSessionsLeft: data.numberOfSessionsLeft.toString(),
+          numberOfSessionsTotal: data.numberOfSessionsTotal.toString(),
+          packageType: data.packageType
+        });
       } catch (error) {
         console.error('Error fetching data:', error);
+        setError('Error fetching data.');
       }
     };
 
-    fetchData(); 
-  }, [packageId]); 
+    fetchData();
+  }, [packageId]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target; 

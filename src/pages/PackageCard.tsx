@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 
 const PackageCard: React.FC<PackageComponentProps> = ({data, onDelete}) => {
 
-  
-  
+
   return (
     <div className="container mt-4">
       <div className="card rounded-5 border border-light" style={{ width: '400px' }}>

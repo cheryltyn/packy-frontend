@@ -9,6 +9,7 @@ const PackagesList: React.FC = () => {
   const [packages, setPackages] = useState<PackageData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const user = useContext(UserContext);
+  const [fronterror, setFrontError] = useState<string>("")
   const [activeFilter, setActiveFilter] = useState<string>('All'); 
 
 
@@ -19,11 +20,11 @@ const PackagesList: React.FC = () => {
         setPackages(data || []);
         setLoading(false);
       } catch (error) {
-        if (error.message === 'Packages not found for the specified user') {
+        if (error instanceof Error && error.message === 'Packages not found for the specified user') {
           setPackages([]);
         } else {
           console.error('Error fetching data:', error);
-          setError('Failed to fetch packages. Please try again later.');
+          setFrontError('Failed to fetch packages. Please try again later.');
         }
         setLoading(false);
       }
@@ -60,7 +61,7 @@ const PackagesList: React.FC = () => {
       {loading ? (
         <div>Loading...</div>
       ) : packages.length === 0 ? (
-        <div>No packages found.</div>
+        <div>No packages found. {fronterror} </div>
       ) : (
         <div className="package-list">
           {packages.map((packageData) => (

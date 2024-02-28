@@ -3,10 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { handleLogin } from '../api/user.ts'
 import { LoginData } from '../types/types.ts'; 
 import { Link, useNavigate } from 'react-router-dom';
-import { getUser } from "../utils/user"; 
-import { getUserData } from '../types/types.ts'; 
 
-const Login: React.FC<{ setLoggedInUser: (fetchedUser: getUserData) => void }> = ({ setLoggedInUser }) => {
+
+const SignUpForm: React.FC = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("")
 
@@ -20,8 +19,6 @@ const Login: React.FC<{ setLoggedInUser: (fetchedUser: getUserData) => void }> =
     try {
       const response = await handleLogin(loginForm);
       if (response.message === 'Login successful') {
-        const fetchedUser = getUser()
-        setLoggedInUser(fetchedUser);
         navigate('/package');
       }
     } catch (error) {
@@ -84,4 +81,4 @@ const Login: React.FC<{ setLoggedInUser: (fetchedUser: getUserData) => void }> =
   );
 };
 
-export default Login;
+export default SignUpForm;

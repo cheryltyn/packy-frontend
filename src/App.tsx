@@ -8,22 +8,30 @@ import EditPackage from './pages/EditPackage';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import { getUser } from "./utils/user"; 
+import { getUserData } from './types/types.ts'; 
 import { useState, useEffect, createContext} from 'react'
 
-export const UserContext = createContext(null);
+export const UserContext = createContext<getUserData | null>(null);
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<getUserData | null>(null); 
 
   useEffect(() => {
     const fetchedUser = getUser();
     setUser(fetchedUser);
   }, []);
 
+  const setLoggedInUser = (userData: getUserData) => {
+    setUser(userData);
+  };
+
+
   function handleLogOut() {
     localStorage.removeItem("token");
     setUser(null);
   }
+
+
 
   console.log(user)
   
@@ -43,7 +51,10 @@ function App() {
               </>
             )}
             <Route path="/signup" element={<SignUp />} />   
-            <Route path="/login" element={<Login />} />   
+            <Route 
+              path="/login" 
+              element={<Login setLoggedInUser={setLoggedInUser} />} 
+            />  
             <Route path="/" element={<Navigate to={user ? '/package' : '/login'} />} />   
           </Routes>
         </div>
