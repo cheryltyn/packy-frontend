@@ -18,17 +18,16 @@ Github Frontend: https://github.com/cheryltyn/packy-frontend
 
 ### ERD:
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/30de36e2-dda7-4ab7-bdfe-4a8729794c40/b8d91998-d561-4b90-a63c-39b13b2371fb/Untitled.png)
+<img width="839" alt="image" src="https://github.com/cheryltyn/packy-frontend/assets/55976709/1037a992-c45d-4e1f-9a9e-d2a049e0529f">
 
 ### Demonstration:
 
 **Landing Page** 
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/30de36e2-dda7-4ab7-bdfe-4a8729794c40/c25a2907-20cc-41b8-9934-8dfa7d405fe3/Untitled.png)
+<img width="907" alt="image" src="https://github.com/cheryltyn/packy-frontend/assets/55976709/ac4f7137-a6e1-4e0f-b406-907381454a96">
+<img width="858" alt="image" src="https://github.com/cheryltyn/packy-frontend/assets/55976709/14f4498a-d321-4350-b359-22f754ab5a1d">
+<img width="929" alt="image" src="https://github.com/cheryltyn/packy-frontend/assets/55976709/28d6e749-23cc-49fc-b0e6-3da70a94f56d">
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/30de36e2-dda7-4ab7-bdfe-4a8729794c40/a9b3fa37-e3bd-46c7-8ca6-53bc9a6be7e7/Untitled.png)
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/30de36e2-dda7-4ab7-bdfe-4a8729794c40/76375d89-693a-4d85-bbe8-677e884312c3/Untitled.png)
 
 ### Code Functionalities
 
