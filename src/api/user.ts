@@ -1,7 +1,6 @@
 import { LoginData, SignupData } from '../types/types.ts';
 
-const BASE_URL = 'http://localhost:3000/user'
-// import.meta.env.VITE_BASE_URL;
+const BASE_URL = `${import.meta.env.VITE_BASE_URL}/user`;
 
 export async function createUser(userData: SignupData): Promise<Response> {
   const token = localStorage.getItem("token");

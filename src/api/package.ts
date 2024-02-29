@@ -1,6 +1,5 @@
 
-const BASE_URL = 'http://localhost:3000/package'
-// import.meta.env.VITE_BASE_URL;
+const BASE_URL = `${import.meta.env.VITE_BASE_URL}/package`;
 
 
 export async function  getAll(userID: string, filter: string) {
