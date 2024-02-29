@@ -35,7 +35,6 @@ const Login: React.FC<{ setLoggedInUser: (fetchedUser: getUserData | null ) => v
       ...loginForm,
       [e.target.name]: e.target.value,
     });
-    console.log(loginForm)
   };
 
   return (

@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import CreatePackage from './pages/CreatePackage';
 import NavBar from './pages/NavBar';
 import User from './pages/User';
-import EditUser from './pages/EditUser';
 import PackagePage from './pages/PackagePage';
 import EditPackage from './pages/EditPackage';
 import SignUp from './pages/SignUp';
@@ -27,7 +26,6 @@ function App() {
     localStorage.removeItem("token");
     setUser(null);
   }
-  console.log(user)
   
   return (
     <UserContext.Provider value={user}>

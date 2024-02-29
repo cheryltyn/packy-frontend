@@ -40,8 +40,7 @@ const PackagesList: React.FC = () => {
   
     fetchData();
   }, [activeFilter]);
-  
-  console.log(packages)
+
 
   const handleDelete = async (packageId: string) => {
     try {

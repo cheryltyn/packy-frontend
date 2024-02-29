@@ -82,7 +82,6 @@ const EditPackage: React.FC = () => {
       return;
     }
     try {
-      console.log(formData); 
       await editOne(packageId!, formData);
       navigate('/package'); 
     } catch (error) {
