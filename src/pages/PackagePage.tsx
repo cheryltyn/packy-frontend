@@ -63,6 +63,8 @@ const PackagesList: React.FC = () => {
         <button className={`btn ${activeFilter === 'Fitness' ? 'btn-primary' : 'btn-secondary'}`} onClick={() => setActiveFilter('Fitness')}>Fitness</button>
         <span className="mx-2"></span> 
         <button className={`btn ${activeFilter === 'Beauty' ? 'btn-primary' : 'btn-secondary'}`} onClick={() => setActiveFilter('Beauty')}>Beauty</button>
+        <span className="mx-2"></span> 
+        <button className={`btn ${activeFilter === 'Wellness' ? 'btn-primary' : 'btn-secondary'}`} onClick={() => setActiveFilter('Wellness')}>Wellness</button>
       </div>
 
       

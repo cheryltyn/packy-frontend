@@ -46,6 +46,13 @@ const AddPackageForm: React.FC = () => {
       return;
     }
 
+    const currentDate = new Date();
+    const expiryDate = new Date(formData.expiryDate);
+    if (expiryDate <= currentDate) {
+      setError('Expiry date must be later than today.');
+      return;
+    }
+
     try {
       if (user) {
         await createOne(formData, user._id); 
@@ -86,6 +93,7 @@ const AddPackageForm: React.FC = () => {
             <div className="d-flex ">
               <button type="button" className={`btn ${formData.packageType === 'Fitness' ? 'btn-primary' : 'btn-outline-primary'}`} onClick={() => handlePackageTypeChange('Fitness')}>Fitness</button>
               <button type="button" className={`btn ${formData.packageType === 'Beauty' ? 'btn-primary' : 'btn-outline-primary'}`} onClick={() => handlePackageTypeChange('Beauty')}>Beauty</button>
+              <button type="button" className={`btn ${formData.packageType === 'Wellness' ? 'btn-primary' : 'btn-outline-primary'}`} onClick={() => handlePackageTypeChange('Wellness')}>Wellness</button>
               <button type="button" className={`btn ${formData.packageType === 'Others' ? 'btn-primary' : 'btn-outline-primary'}`} onClick={() => handlePackageTypeChange('Others')}>Others</button>
             </div>
             </div>
