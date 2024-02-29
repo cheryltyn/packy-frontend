@@ -4,6 +4,7 @@ const BASE_URL = 'http://localhost:3000/user'
 // import.meta.env.VITE_BASE_URL;
 
 export async function createUser(userData: SignupData): Promise<Response> {
+  const token = localStorage.getItem("token");
   try {
     const fullURL = `${BASE_URL}/signup`;
     const response = await fetch(fullURL, {
@@ -11,6 +12,7 @@ export async function createUser(userData: SignupData): Promise<Response> {
       body: JSON.stringify(userData),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -27,6 +29,7 @@ export async function createUser(userData: SignupData): Promise<Response> {
 
  
   export async function handleLogin(userData: LoginData) {
+    const token = localStorage.getItem("token");
     try {
         const fullURL = `${BASE_URL}/login`;  
         console.log('logging in')
@@ -35,7 +38,7 @@ export async function createUser(userData: SignupData): Promise<Response> {
             body: JSON.stringify(userData), 
             headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             //Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
         });
@@ -53,6 +56,7 @@ export async function createUser(userData: SignupData): Promise<Response> {
   }
  
   export async function editUser(userData : LoginData) {
+    const token = localStorage.getItem("token");
     try {
         const fullURL = `${BASE_URL}/edituser`;  
         const response = await fetch(fullURL, {
@@ -60,7 +64,7 @@ export async function createUser(userData: SignupData): Promise<Response> {
             body: JSON.stringify(userData), 
             headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             //Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
         });
@@ -80,13 +84,14 @@ export async function createUser(userData: SignupData): Promise<Response> {
  
   
   export async function deleteUser(userEmail : string) {
+    const token = localStorage.getItem("token");
     try {
         const fullURL = `${BASE_URL}/deleteuser?email=${userEmail}`;  
         const response = await fetch(fullURL, {
             method: "DELETE",
             headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             //Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
         });
@@ -106,13 +111,14 @@ export async function createUser(userData: SignupData): Promise<Response> {
  
 
   export async function fetchUser(userID : string) {
+    const token = localStorage.getItem("token");
     try {
         const fullURL = `${BASE_URL}/getuser?id=${userID}`;  
         const response = await fetch(fullURL, {
             method: "GET",
             headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             //Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
         });

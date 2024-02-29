@@ -4,13 +4,14 @@ const BASE_URL = 'http://localhost:3000/package'
 
 
 export async function  getAll(userID: string, filter: string) {
+  const token = localStorage.getItem("token");
   try {
     const fullURL = `${BASE_URL}/packages?userid=${userID}&filter=${filter}`;  
     const response = await fetch(fullURL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        // Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         //Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
@@ -27,12 +28,13 @@ export async function  getAll(userID: string, filter: string) {
     return data;
   } catch (error) {
     console.error('Error fetching data:', error);
-    throw error; // Rethrow the error
+    throw error;
   }
 }
 
   
 export async function createOne(createdData : any, userId : string) {
+    const token = localStorage.getItem("token");
     try {
         const fullURL = `${BASE_URL}/newpackage?userid=${userId}`;  
         const response = await fetch(fullURL, {
@@ -40,7 +42,7 @@ export async function createOne(createdData : any, userId : string) {
             body: JSON.stringify(createdData),
             headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             //Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
         });
@@ -57,13 +59,14 @@ export async function createOne(createdData : any, userId : string) {
   }
   
 export async function fetchOne(packageId : string) {
+    const token = localStorage.getItem("token");
     try {
         const fullURL = `${BASE_URL}/fetchpackage?id=${packageId}`;  
         const response = await fetch(fullURL, {
             method: "GET",
             headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             //Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
         });
@@ -79,6 +82,7 @@ export async function fetchOne(packageId : string) {
   }
   
   export async function editOne(packageId: string , updatedData : any) {
+    const token = localStorage.getItem("token");
     try {
         const fullURL = `${BASE_URL}/editpackage?id=${packageId}`;  
         const response = await fetch(fullURL, {
@@ -86,7 +90,7 @@ export async function fetchOne(packageId : string) {
             body: JSON.stringify(updatedData),
             headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             //Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
         });
@@ -102,13 +106,14 @@ export async function fetchOne(packageId : string) {
   }
   
   export async function deleteOne(packageId : string) {
+    const token = localStorage.getItem("token");
     try {
         const fullURL = `${BASE_URL}/deletepackage?id=${packageId}`;  
         const response = await fetch(fullURL, {
             method: "DELETE",
             headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             //Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
         });
