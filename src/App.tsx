@@ -37,14 +37,12 @@ function App() {
               <>
                 <Route path="/create" element={<CreatePackage />} />
                 <Route path="/user" element={<User />} />
-                <Route path="/edit-user" element={<EditUser />} />
                 <Route path="/package" element={<PackagePage />} /> 
                 <Route path="/editpackage/:packageId" element={<EditPackage />} />   
               </>
             )}   
             {!user && <Route path="/create" element={<Navigate to="/login" />} />}
             {!user && <Route path="/user" element={<Navigate to="/login" />} />}
-            {!user && <Route path="/edit-user" element={<Navigate to="/login" />} />}
             {!user && <Route path="/package" element={<Navigate to="/login" />} />}
             {!user && <Route path="/editpackage/:packageId" element={<Navigate to="/login" />} />}
             {user && <Route path="/signup" element={<Navigate to="/package" />} />}
