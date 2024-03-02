@@ -1,6 +1,5 @@
 # Packy
 
-You will have 10 minutes to present and demonstrate the following:
 
 ### Introducing Packy!
 
